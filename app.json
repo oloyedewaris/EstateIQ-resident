@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "EstateIQ Resident",
+    "slug": "EstateIQ",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1037B5"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "enableDangerousExperimentalLeanBuilds": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.estateiq.estateiq"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "da3c90b3-2aa7-4267-a35b-d9dae871b68c"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/da3c90b3-2aa7-4267-a35b-d9dae871b68c"
+    }
+  },
+  "runtimeVersion": "1.0.0",
+  "updates": {
+    "url": "https://u.expo.dev/..."
+  },
+  "plugins": [
+    [
+      "expo-image-picker",
+      {
+        "photosPermission": "Allow $(PRODUCT_NAME) to access your photos",
+        "cameraPermission": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
+    ],
+    [
+      "expo-build-properties",
+      {
+        "android": {
+          "enableProguardInReleaseBuilds": true
+        }
+      }
+    ]
+  ]
+}

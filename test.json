@@ -1,0 +1,39 @@
+{
+    "account_name": "Waris Oloyede Temitope",
+    "account_number": "0663526412",
+    "bank_name": "GTBank",
+    "collection_target": null,
+    "collection_type": "NOT_MANDATORY",
+    "due_date": 0,
+    "estate": "34465d8c-fcf0-4b49-bb18-34a19ed5b3a4",
+    "id": "f4394771-4a6a-4ec7-8a4a-5f83e4f47071",
+    "minimum_purchase": "30.00",
+    "name": "Electricity bill",
+    "payment_frequency": "MONTHLY",
+    "price": "30.00",
+    "staff": {
+        "created_by": null,
+        "designation": null,
+        "emergency_service": true,
+        "estate": [Object
+        ],
+        "estate_street": null,
+        "estate_user_id": "LA3778",
+        "estate_zone": null,
+        "gate_pass": true,
+        "id": "48386cf8-15a0-4fdd-8c52-845fee6d2d57",
+        "invited": false,
+        "on_to_one_message": true,
+        "profile_image": null,
+        "relationship": null,
+        "role": "OTHERS",
+        "status": "ACTIVE",
+        "timestamp": "2023-10-25T18:21:18.565910Z",
+        "user": [Object
+        ],
+        "user_category": "OTHERS",
+        "user_type": "ADMIN",
+        "utility_portal": true
+    },
+    "timestamp": "2023-11-07T13:07:10.742493Z"
+}

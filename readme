@@ -1,0 +1,12 @@
+Step1 set up expo CLI on your system .
+
+Step2 clone the project and do yarn install or npm install (if yarn is not on the system) , this will install all the required dependencies.
+
+Step 3  run expo start , this will generate a qr code 
+
+Step4 on you android device device download expo go app an scan the we code on your system using the expo go app on your phone 
+
+Note : both the system and the phone must be on the same 
+Wi-Fi network 
+
+Then the app should run on the phone and you can test everything
