@@ -56,7 +56,7 @@ const ReportAnIssue = (props) => {
               fontSize: 16,
             }}
           >
-            Log Issue
+            Log an Issue
           </Text>
         </TouchWrap>
       </Container>
@@ -87,7 +87,7 @@ const ReportAnIssue = (props) => {
 
           {issuesQuery.isLoading ? (
             <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-              <ActivityIndicator color={Colors.appPrimaryBlue} size='large'/>
+              <ActivityIndicator color={Colors.appPrimaryBlue} size='large' />
             </View>
           ) : !issues?.length ? (
             <>

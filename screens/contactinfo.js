@@ -100,7 +100,7 @@ const Contactinfo = (props) => {
         </TouchableOpacity>
         <Container marginLeft={5} marginTop={3}>
           <Text style={{ fontSize: 18, fontWeight: "bold", color: "white" }}>
-            Contact info
+            Contact Info
           </Text>
         </Container>
         <Container marginLeft={4} marginTop={3} width={90}>
@@ -202,7 +202,7 @@ const Contactinfo = (props) => {
                     fontSize: 20,
                   }}
                 >
-                  Contact Information updated
+                  Contact Information Updated
                 </Text>
               </Container>
             </Container>

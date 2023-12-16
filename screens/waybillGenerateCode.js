@@ -26,12 +26,14 @@ import { getUserEstateDetails } from "../api/user";
 import { formatAMPM } from "../utils/formatDate";
 import { useFocusEffect } from "@react-navigation/native";
 import copyToClipboard from "../utils/clipBoard";
+import { handleBackendError } from "../utils/errors";
 
 const WaybillGenerateCode = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [fetchedCode, setFetchedCode] = useState('');
   const [showDeparture, setShowDeparture] = useState(false);
   const keyboardVerticalOffset = Platform.OS === "ios" ? -40 : -40;
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
 
   const userEstateDetail = useQuery(['getUserEstateDetails'], getUserEstateDetails)
   const userDetailsAddress = userEstateDetail?.data?.data?.address
@@ -64,10 +66,15 @@ const WaybillGenerateCode = (props) => {
       onSuccess: res => {
         setModalVisible(true)
         setFetchedCode(res?.data?.access_code)
-        formik.resetForm()
+        // formik.resetForm()
       },
       onError: (err) => {
-        Alert.alert('An error occurred', JSON.stringify(err?.response?.data))
+        console.log('err?.response?.data', err?.response?.data)
+        const setHomeError = err?.response?.data?.error === 'Set home address in profile page before generating access code.'
+        if (setHomeError)
+          setAddressModalVisible(true)
+        else
+          Alert.alert('An error occurred', handleBackendError(err?.response?.data))
       }
     }
   )
@@ -91,8 +98,8 @@ const WaybillGenerateCode = (props) => {
       if (values.quantity === '') {
         quantity_to_use = '0';
       }
-      // createCodeMutation.mutate({ ...values, vehicle_number: vehicle_number_to_use, quantity: quantity_to_use })
-      createCodeMutation.mutate(values)
+      createCodeMutation.mutate({ ...values, vehicle_number: vehicle_number_to_use, quantity: quantity_to_use })
+      // createCodeMutation.mutate(values)
 
     }
   })
@@ -161,7 +168,7 @@ const WaybillGenerateCode = (props) => {
                 value={formik.values.receivers_name}
 
                 text={"Receiver's  Name"}
-                placeholder={"Enter your full name"}
+                placeholder={"Enter receiver's full name"}
               />
             </Container>
             <Container marginTop={1} marginLeft={5}>
@@ -172,7 +179,7 @@ const WaybillGenerateCode = (props) => {
                 value={formik.values.item_type}
 
                 text={"Item(s)"}
-                placeholder={"List Items here"}
+                placeholder={"List items here"}
               />
             </Container>
 
@@ -335,13 +342,11 @@ const WaybillGenerateCode = (props) => {
                   onShare(`
 Hi ${formik.values?.receivers_name},
 
-Your one-time code is 
+Your waybill number is 
 
 ${fetchedCode}
 
-Address: ${userDetailsAddress},
-
-expires on ${formattedToDate}
+Address: ${userDetailsAddress}
 
 Powered by: www.estateiq.ng 
 `);
@@ -352,6 +357,52 @@ Powered by: www.estateiq.ng
           </Container>
         </Container>
       </Modal>
+
+      <Modal animationType="slide" visible={addressModalVisible} transparent>
+        <Container
+          flex={1}
+          verticalAlignment="center"
+          horizontalAlignment="center"
+          backgroundColor={"rgba(0, 0, 0, 0.7)"}
+        >
+          <Container
+            height={35}
+            width={90}
+            verticalAlignment="center"
+            horizontalAlignment="center"
+            backgroundColor={"white"}
+            borderRadius={10}
+          >
+            <Container width={90} direction="row">
+              <Container width={70}></Container>
+            </Container>
+            <Container width={90} direction="row" marginTop={-1}>
+              <Container
+                width={90}
+                verticalAlignment="center"
+                horizontalAlignment="center"
+              >
+                <Text style={{ fontSize: 20, textAlign: 'center', paddingHorizontal: 10 }}>
+                  To start using this feature, you have to first set your home address for your guests. Kindly set your home address here
+                </Text>
+              </Container>
+            </Container>
+
+
+            <Container
+              marginTop={4}
+              width={90}
+              verticalAlignment="center"
+              horizontalAlignment="center"
+            >
+              <LongButton
+                onPress={() => props.navigation.navigate('personalbio')}
+                text={"Set Home Address"} width={50} np={50} />
+            </Container>
+          </Container>
+        </Container>
+      </Modal>
+
     </Container>
   );
 };

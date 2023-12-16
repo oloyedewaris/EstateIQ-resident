@@ -35,15 +35,17 @@ const AccessLog = (props) => {
   const logsData = accessQuery?.data?.data?.results
 
   const revokeMutation = useMutation(
-    (formData, type) => {
+    async (formData, type) => {
       const formToUse = new FormData()
       formToUse.append('access', type)
       formToUse.append('access_code', formData.access_code)
-      return modifyAccessLog(formToUse)
+      modifyAccessLog(formToUse)
+      return await accessQuery.refetch()
     },
     {
       onSuccess: res => {
         Alert.alert('Successful', 'Access code status changed')
+        setRevokeModalVisible(false)
       },
       onError: err => {
         Alert.alert('An error occurred', err?.response?.data)
@@ -219,6 +221,7 @@ const AccessLog = (props) => {
                 </Text>
 
                 <TouchableOpacity
+                  hitSlop={{ top: 10, bottom: 10 }}
                   style={{
                     textAlign: 'left',
                     width: '25%',
@@ -237,7 +240,7 @@ const AccessLog = (props) => {
                       color: log?.access ? 'rgba(225, 0, 0, 0.3)' : 'red'
                     }}
                   >
-                    Revoke
+                    {log?.access ? 'Revoked' : "Revoke"}
                   </Text>
                 </TouchableOpacity>
 
@@ -307,7 +310,7 @@ const AccessLog = (props) => {
                   color: Colors.appTextGrey,
                 }}
               >
-                Are you want to revoke the permission granted to {logToView?.first_name} {logToView?.last_name}'s account?
+                Are you sure you want to revoke the permission granted to {logToView?.first_name} {logToView?.last_name}'s access code?
               </Text>
             </Container>
             <Container
@@ -329,7 +332,7 @@ const AccessLog = (props) => {
                   fontSize: 16,
                 }}
               >
-                No, Go back
+                No, go back
               </Text>
             </TouchWrap>
           </Container>

@@ -54,7 +54,7 @@ const Notifications = (props) => {
             </Container>
             <Container>
               <Text style={{ fontWeight: "bold", fontSize: 16, textAlign: "center" }}>
-                You have nnotifications yet!
+                You have no notifications yet!
               </Text>
             </Container>
           </>

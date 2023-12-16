@@ -113,6 +113,7 @@ const Marketplace = (props) => {
               <Vendcard
                 key={advert.id}
                 id={advert.id}
+                advert={advert}
                 source={advert?.image}
                 text1={advert?.title}
                 text2={advert?.description}

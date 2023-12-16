@@ -4,10 +4,11 @@ import {
   ScrollView,
   Alert,
   Linking,
+  Modal,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "../helper/constants";
 import { GlobalContext } from "../context/Provider";
@@ -16,25 +17,39 @@ import { useQuery } from "react-query";
 import { getUserEstateDetails } from "../api/user";
 import { fetchAdverts } from "../api/advert";
 import { logout } from "../context/actions/auth";
+import LongButton from "../component/longbutton";
 
 const Home = (props) => {
   const { authState: { user, estateData }, authDispatch } = useContext(GlobalContext);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const userDetailsQuery = useQuery(['getUserEstateDetails'], getUserEstateDetails)
+  const userDetailsQuery = useQuery(['getUserEstateDetails'], getUserEstateDetails, { cacheTime: 0 })
   const profileImage = userDetailsQuery?.data?.data?.profile_image;
   const profile = userDetailsQuery?.data?.data;
 
   useEffect(() => {
     if (profile?.estate_user && profile?.estate_user?.user_type !== 'RESIDENT') {
-      Alert.alert('Authentication error', 'Please use the resident app for a security account', [{
-        text: 'OK',
-        onPress: () => logout()(authDispatch)
-      }])
+      setModalVisible(true)
+    } else {
+      setModalVisible(false)
     }
   }, [profile?.estate_user])
 
-  const advertsQuery = useQuery(['fetchAdverts'], fetchAdverts)
-  const advert = advertsQuery?.data?.data?.results?.length && advertsQuery?.data?.data?.results[0]
+  const advertsQuery = useQuery(['fetchAdverts'], fetchAdverts);
+  const advert = advertsQuery?.data?.data?.results?.length && advertsQuery?.data?.data?.results[0];
+
+  const getTimeGreet = () => {
+    var today = new Date()
+    var curHr = today.getHours()
+
+    if (curHr < 12) {
+      return 'Good Morning';
+    } else if (curHr < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  }
 
   return (
     <Container flex={1} backgroundColor={"#FFFFFF"} marginBottom={7}>
@@ -92,7 +107,7 @@ const Home = (props) => {
             </Container>
             <Container width={50} height={10} marginLeft={-2}>
               <Container width={50} height={5} verticalAlignment="center">
-                <Text style={{ color: "white", fontSize: 14 }}>Good Day</Text>
+                <Text style={{ color: "white", fontSize: 14 }}>{getTimeGreet()}</Text>
               </Container>
               <Container width={50} verticalAlignment="center">
                 <Text
@@ -106,7 +121,7 @@ const Home = (props) => {
         </TouchableOpacity>
 
         <Container marginTop={2} marginLeft={6}>
-          <Text>Select a prefered option</Text>
+          <Text>Select a preferred option</Text>
         </Container>
         <Container width={100} height={16} direction="row" marginTop={2}>
           <TouchWrap onPress={() => props.navigation.navigate("AccessCode")}>
@@ -239,70 +254,120 @@ const Home = (props) => {
           </Container>
         </Container> */}
 
-        <Container
-          width={90}
-          marginLeft={5}
-          marginTop={3}
-          backgroundColor={"#E4E4E4"}
-          borderBottomLeftRadius={10}
-          borderBottomRightRadius={10}
-          borderTopLeftRadius={4}
-          borderTopRightRadius={4}
-          marginBottom={5}
-          paddingVertical={2}
-        >
-          <Container horizontalAlignment="center" paddingHorizontal={3}>
-            <Container
-              width={90}
-              borderRadius={5}
-              height={3}
-              direction="row"
-              verticalAlignment="center"
-              marginLeft={7}
-            >
-              <Container width={38}>
-                <Text
-                  style={{ fontWeight: "bold", color: Colors.appPrimaryBlue }}
+        {advert ? (
+          <Container
+            width={90}
+            marginLeft={5}
+            marginTop={3}
+            backgroundColor={"#E4E4E4"}
+            borderBottomLeftRadius={10}
+            borderBottomRightRadius={10}
+            borderTopLeftRadius={4}
+            borderTopRightRadius={4}
+            marginBottom={5}
+            paddingVertical={2}
+          >
+            <Container horizontalAlignment="center" paddingHorizontal={3}>
+              <Container
+                width={90}
+                borderRadius={5}
+                height={3}
+                direction="row"
+                verticalAlignment="center"
+                marginLeft={7}
+              >
+                <Container width={38}>
+                  <Text
+                    style={{ fontWeight: "bold", color: Colors.appPrimaryBlue }}
+                  >
+                    {advert?.title}
+                  </Text>
+                </Container>
+                <Container
+                  width={48}
+                  horizontalAlignment="flex-end"
+                  height={4}
+                  verticalAlignment="center"
                 >
-                  {advert?.title}
+                  <Container width={17} height={17}>
+                    <ImageWrap source={{ uri: advert?.image }} fit="contain" />
+                  </Container>
+                </Container>
+              </Container>
+
+              <Container marginTop={1}>
+                <Text style={{ color: "black", fontSize: 10.5 }}>
+                  {advert?.description}
                 </Text>
               </Container>
+            </Container>
+            <TouchWrap>
               <Container
-                width={48}
-                horizontalAlignment="flex-end"
-                height={4}
+                width={40}
+                height={5}
+                backgroundColor={Colors.appPrimaryBlue}
+                borderRadius={5}
                 verticalAlignment="center"
+                horizontalAlignment="center"
+                marginLeft={3}
+                marginTop={1.5}
               >
-                <Container width={17} height={17}>
-                  <ImageWrap source={{ uri: advert?.image }} fit="contain" />
-                </Container>
+                <TouchWrap onPress={() => Linking.openURL(`tel:${advert?.phone}`)}>
+                  <Text style={{ color: Colors.appWhite }}>Make an Enquiry</Text>
+                </TouchWrap>
+              </Container>
+            </TouchWrap>
+          </Container>
+        ) : null}
+      </ScrollView>
+
+      <Modal animationType="slide" visible={modalVisible} transparent>
+        <Container
+          flex={1}
+          verticalAlignment="center"
+          horizontalAlignment="center"
+          backgroundColor={"rgba(0, 0, 0, 0.7)"}
+        >
+          <Container
+            height={35}
+            width={90}
+            verticalAlignment="center"
+            horizontalAlignment="center"
+            backgroundColor={"white"}
+            borderRadius={10}
+          >
+            <Container width={90} direction="row">
+              <Container width={70}></Container>
+            </Container>
+            <Container width={90} direction="row" marginTop={-1}>
+              <Container
+                width={90}
+                verticalAlignment="center"
+                horizontalAlignment="center"
+              >
+                <Text style={{ fontSize: 20, fontWeight: '500', textAlign: 'center' }}>
+                  This is account is not supported on this app, Please use the security app for a security account
+                </Text>
               </Container>
             </Container>
 
-            <Container marginTop={1}>
-              <Text style={{ color: "black", fontSize: 10.5 }}>
-                {advert?.description}
-              </Text>
-            </Container>
-          </Container>
-          <TouchWrap>
+
             <Container
-              width={40}
-              height={5}
-              backgroundColor={Colors.appPrimaryBlue}
-              borderRadius={5}
+              marginTop={4}
+              width={90}
               verticalAlignment="center"
               horizontalAlignment="center"
-              marginLeft={3}
-              marginTop={1.5}
             >
-              <TouchWrap onPress={() => Linking.openURL(`tel:${advert?.phone}`)}>
-                <Text style={{ color: Colors.appWhite }}>Make an Enquiry</Text>
-              </TouchWrap>
+              <LongButton
+                onPress={() => {
+                  logout()(authDispatch)
+                  Linking.openURL('https://play.google.com/store/apps/details?id=com.estateiq.security')
+                }}
+                text={"Get Security App Here"} width={50} np={50} />
             </Container>
-          </TouchWrap>
+          </Container>
         </Container>
-      </ScrollView>
+      </Modal>
     </Container>
   );
 };

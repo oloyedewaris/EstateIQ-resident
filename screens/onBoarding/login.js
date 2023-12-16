@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../../helper/index";
 import { AppIcons } from "../../helper/images";
@@ -46,6 +47,7 @@ const Login = (props) => {
         ToastLong('An error occurred try again')
     },
     onError: (err) => {
+      console.log('err', (err.response))
       Alert.alert('Login Error', JSON.stringify(err?.response?.data))
     }
   })
@@ -154,12 +156,13 @@ const Login = (props) => {
               width={100}
               marginTop={4}
               horizontalAlignment="center"
+              paddingVertical={4}
             >
               <Container>
                 <Text style={{ fontSize: 15 }}>New user?</Text>
               </Container>
-              <Container height={4}>
-                <TouchWrap onPress={() => props.navigation.navigate("signup")}>
+              <Container height={9}>
+                <TouchableOpacity hitSlop={{ top: 30, bottom: 30 }} onPress={() => props.navigation.navigate("signup")}>
                   <Text
                     style={{
                       fontSize: 15,
@@ -169,12 +172,12 @@ const Login = (props) => {
                   >
                     Create your account
                   </Text>
-                </TouchWrap>
+                </TouchableOpacity>
               </Container>
             </Container>
             <Container
               width={100}
-              height={20}
+              height={10}
               verticalAlignment="center"
               horizontalAlignment="center"
             >

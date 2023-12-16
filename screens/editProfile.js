@@ -128,7 +128,7 @@ const Editprofile = ({ navigation }) => {
           <Text style={{ color: "black", paddingLeft: 5 }}>Back</Text>
         </TouchableOpacity>
         <Container marginTop={2} marginLeft={5}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Edit profile</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>Edit Profile</Text>
         </Container>
         <Container
           height={15}
@@ -243,7 +243,7 @@ const Editprofile = ({ navigation }) => {
           </Container>
         </Container>
 
-        <Container height={10} width={90} marginLeft={5} marginTop={3}>
+        {/* <Container height={10} width={90} marginLeft={5} marginTop={3}>
           <Container height={5} width={90} verticalAlignment="center">
             <Text style={{ fontWeight: "bold", fontSize: 16 }}>
               Estate Type
@@ -256,10 +256,11 @@ const Editprofile = ({ navigation }) => {
                 color: Colors.appTextGrey,
               }}
             >
+              {console.log('estateData?.estate', estateData)}
               {estateData?.estate?.estate_type}
             </Text>
           </Container>
-        </Container>
+        </Container> */}
 
         <Container width={90} marginLeft={5} marginTop={3}>
           <Container width={90} verticalAlignment="center">
@@ -287,7 +288,7 @@ const Editprofile = ({ navigation }) => {
                 <Text
                   style={{ color: Colors.appPrimaryBlue, fontWeight: "bold" }}
                 >
-                  Change Password ?
+                  Change Password
                 </Text>
               </TouchWrap>
             </Container>
@@ -308,7 +309,7 @@ const Editprofile = ({ navigation }) => {
         <Container marginTop={2}>
           <Setting
             icon={<FontAwesome name="user-o" size={22} color={"black"} />}
-            text={"Personal bio"}
+            text={"Personal Bio"}
             onPress={() => navigation.navigate("personalbio")}
           />
         </Container>
@@ -316,7 +317,7 @@ const Editprofile = ({ navigation }) => {
         <Container marginTop={2}>
           <Setting
             icon={<Feather name="phone-call" size={24} color="black" />}
-            text={"Contact info"}
+            text={"Contact Info"}
             onPress={() => navigation.navigate("contactinfo")}
           />
         </Container>
@@ -387,7 +388,7 @@ const Editprofile = ({ navigation }) => {
             >
               <LongButton
                 onPress={() => logout()(authDispatch)}
-                text={"Yes, Log out"}
+                text={"Yes, log out"}
               />
             </Container>
             <TouchWrap width={80} onPress={() => setModalVisible(false)}>
@@ -399,7 +400,7 @@ const Editprofile = ({ navigation }) => {
                   fontSize: 16,
                 }}
               >
-                No, Go back
+                No, go back
               </Text>
             </TouchWrap>
           </Container>

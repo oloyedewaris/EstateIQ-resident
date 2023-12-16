@@ -48,7 +48,7 @@ const AccessCode = (props) => {
         </TouchableOpacity>
         <Container marginLeft={5} marginTop={3}>
           <Text style={{ fontSize: 18, fontWeight: "bold", color: "black" }}>
-            Generate Access code
+            Generate Access Code
           </Text>
         </Container>
         <Container marginLeft={4} marginTop={1}>

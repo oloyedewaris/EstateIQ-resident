@@ -10,6 +10,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Image,
+  Alert,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
@@ -30,8 +31,14 @@ const SetEstate = (props) => {
   const { authDispatch } = useContext(GlobalContext)
   const estateDetailsQuery = useQuery(['getUserEstates'], getUserEstates)
   const currentEstates = estateDetailsQuery?.data?.data?.results?.length && estateDetailsQuery?.data?.data?.results;
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
+  const handleSelectEstate = (estate) => {
+    if (estate.status !== 'ACTIVE')
+      return Alert.alert('Validation Error', `Your estate admin is yet to approve your request to join ${estate?.estate?.name} Estate on EstateIQ. Kindly contact your estate admin for approval.`)
+    setEstate(estate)(authDispatch);
+    navigation.navigate('buttomTab');
+  }
 
   return (
     <Container flex={1} backgroundColor={"#FFFFFF"}>
@@ -50,16 +57,13 @@ const SetEstate = (props) => {
       <ScrollView>
         {estateDetailsQuery.isLoading ? (
           <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator color={Colors.appPrimaryBlue} size='large'/>
+            <ActivityIndicator color={Colors.appPrimaryBlue} size='large' />
           </View>
         ) : (
           <View>
             {currentEstates?.map(estate => (
               <TouchableOpacity key={estate.id}
-                onPress={() => {
-                  setEstate(estate)(authDispatch);
-                  navigation.navigate('buttomTab');
-                }}
+                onPress={() => handleSelectEstate(estate)}
               >
                 <Container
                   height={23}

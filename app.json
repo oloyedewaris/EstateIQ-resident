@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "estateiqres",
     "name": "EstateIQ Resident",
     "slug": "EstateIQ",
     "version": "1.0.0",

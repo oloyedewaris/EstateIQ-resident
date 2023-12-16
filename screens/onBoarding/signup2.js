@@ -317,12 +317,19 @@ const Signup2 = (props) => {
               style={{
                 color: "black",
                 fontSize: 16,
-
                 textAlign: "center",
               }}
             >
-              Your account registration was successful.Please check your email
-              to verify your account.
+              Your account registration was successful.
+            </Text>
+            <Text
+              style={{
+                color: "black",
+                fontSize: 16,
+                textAlign: "center",
+              }}
+            >
+              Please check your email to verify your account.
             </Text>
           </Container>
 

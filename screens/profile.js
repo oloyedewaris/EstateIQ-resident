@@ -175,7 +175,7 @@ const Profilee = (props) => {
               color={Colors.appPrimaryBlue}
             />
           }
-          text={"Edit profile"}
+          text={"Edit Profile"}
           onPress={() => props.navigation.navigate("editprofile")}
         />
       </Container>

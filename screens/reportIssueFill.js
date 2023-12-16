@@ -47,7 +47,7 @@ const ReportIssueFill = (props) => {
     initialValues: {
       title: '',
       message: '',
-      receivers: '',
+      receivers: 'EXCOS',
       reason: '',
     },
     validationSchema: Schema,
@@ -108,22 +108,6 @@ const ReportIssueFill = (props) => {
             multiline
           />
         </Container>
-
-        <SelectDropdown
-          data={[
-            { label: 'Chef security officer', value: 'CHIEF_SECURITY_OFFICER' },
-            { label: 'Financial secretary', value: 'FINANCIAL_SECRETARY' },
-            { label: 'Estate manager', value: 'ESTATE_MANAGER' },
-            { label: 'Exco', value: 'EXCOS' },
-          ]}
-
-          onChangeText={item => formik.handleChange('receivers')(item?.value)}
-          error={(formik.errors.receivers && formik.touched.receivers) ? formik.errors.receivers : ''}
-          onBlur={formik.handleBlur('receivers')}
-          value={formik.values.receivers}
-          text='Receiver'
-          placeholder="Select"
-        />
 
         <SelectDropdown
           data={[

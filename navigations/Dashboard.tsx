@@ -100,7 +100,7 @@ const Dashboard = () => {
     <Tab.Navigator screenOptions={generalOptions} >
       <Tab.Screen name="Home" component={Home} options={homeOptions} />
       <Tab.Screen name="Acces Log" component={AccessLog} options={accessLogOptions} />
-      <Tab.Screen name="Issues" component={ReportAnIssue} options={reportOptions} />
+      <Tab.Screen name="ReportAnIssue" component={ReportAnIssue} options={reportOptions} />
       <Tab.Screen name="Settings" component={Profilee} options={profileOptions} />
     </Tab.Navigator>
   );

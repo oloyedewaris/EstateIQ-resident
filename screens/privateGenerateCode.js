@@ -29,6 +29,7 @@ import copyToClipboard from "../utils/clipBoard";
 
 const PrivateGenerateCode = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [fetchedCode, setFetchedCode] = useState('');
   const [showArrival, setShowArrival] = useState(false);
   const [showDeparture, setShowDeparture] = useState(false);
@@ -72,10 +73,14 @@ const PrivateGenerateCode = (props) => {
       onSuccess: res => {
         setModalVisible(true)
         setFetchedCode(res?.data?.access_code)
-        formik.resetForm()
+        // formik.resetForm()
       },
       onError: (err) => {
-        Alert.alert('An error occurred', handleBackendError(err?.response?.data))
+        const setHomeError = err?.response?.data?.error === 'Set home address in profile page before generating access code.'
+        if (setHomeError)
+          setAddressModalVisible(true)
+        else
+          Alert.alert('An error occurred', handleBackendError(err?.response?.data))
       }
     }
   )
@@ -130,7 +135,7 @@ const PrivateGenerateCode = (props) => {
             <Text
               style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
             >
-              Generate Access code
+              Generate Access Code
             </Text>
           </Container>
           <Container marginLeft={4} marginTop={2}>
@@ -156,7 +161,6 @@ const PrivateGenerateCode = (props) => {
               onChangeText={formik.handleChange('first_name')}
               onBlur={formik.handleBlur('first_name')}
               value={formik.values.first_name}
-
               text={"First Name"}
               placeholder={"(Guest)"}
             />
@@ -210,46 +214,50 @@ const PrivateGenerateCode = (props) => {
           {(formik.values.access_type && formik.values.access_type) === 'PERMANENT' ? (
             <TouchableOpacity onPress={() => setShowDeparture(true)}>
               <Container marginTop={1} marginLeft={5}>
-                <InputCard
-                  editable={false} selectTextOnFocus={false}
-                  error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
-                  onChangeText={formik.handleChange('to_date')}
-                  onBlur={formik.handleBlur('to_date')}
-                  value={formik.values.to_date && formattedToDate}
+                <View removeClippedSubviews={true} pointerEvents="none">
+                  <InputCard
+                    selectTextOnFocus={false}
+                    error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
+                    onChangeText={formik.handleChange('to_date')}
+                    onBlur={formik.handleBlur('to_date')}
+                    value={formik.values.to_date && formattedToDate}
 
-                  text={"Expiry Date and Time"}
-                  placeholder={"DD/MM/YYYY:TT"}
-                />
+                    text={"Expiry Date and Time"}
+                    placeholder={"DD/MM/YYYY:TT"}
+                  />
+                </View>
               </Container>
             </TouchableOpacity>
           ) : (
             <>
               <TouchableOpacity onPress={() => setShowArrival(true)}>
                 <Container marginTop={1} marginLeft={5}>
-                  <InputCard
-                    editable={false} selectTextOnFocus={false}
-                    error={(formik.errors.from_date && formik.touched.from_date) ? formik.errors.from_date : ''}
-                    onChangeText={formik.handleChange('from_date')}
-                    onBlur={formik.handleBlur('from_date')}
-                    value={formik.values.to_date && formattedFromDate}
-
-                    text={"Arrival Date and Time"}
-                    placeholder={"DD/MM/YYYY"}
-                  />
+                  <View removeClippedSubviews={true} pointerEvents="none">
+                    <InputCard
+                      selectTextOnFocus={false}
+                      error={(formik.errors.from_date && formik.touched.from_date) ? formik.errors.from_date : ''}
+                      onChangeText={formik.handleChange('from_date')}
+                      onBlur={formik.handleBlur('from_date')}
+                      value={formik.values.to_date && formattedFromDate}
+                      text={"Arrival Date and Time"}
+                      placeholder={"DD/MM/YYYY"}
+                    />
+                  </View>
                 </Container>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setShowDeparture(true)}>
                 <Container marginTop={1} marginLeft={5}>
-                  <InputCard
-                    editable={false} selectTextOnFocus={false}
-                    error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
-                    onChangeText={formik.handleChange('to_date')}
-                    onBlur={formik.handleBlur('to_date')}
-                    value={formik.values.to_date && formattedToDate}
-
-                    text={"Departure Date and Time"}
-                    placeholder={"DD/MM/YYYY:TT"}
-                  />
+                  <View removeClippedSubviews={true} pointerEvents="none">
+                    <InputCard
+                      selectTextOnFocus={false}
+                      error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
+                      onChangeText={formik.handleChange('to_date')}
+                      onBlur={formik.handleBlur('to_date')}
+                      value={formik.values.to_date && formattedToDate}
+                      text={"Departure Date and Time"}
+                      placeholder={"DD/MM/YYYY:TT"}
+                    />
+                  </View>
                 </Container>
               </TouchableOpacity>
             </>
@@ -358,7 +366,7 @@ const PrivateGenerateCode = (props) => {
                   onShare(`
 Hi ${formik.values?.first_name} ${formik.values?.last_name},
 
-Your one-time code is 
+Your ${formik?.values?.access_type} access code is 
 
 ${fetchedCode}
 
@@ -371,6 +379,51 @@ Powered by: www.estateiq.ng
                   props.navigation.goBack()
                 }}
               />
+            </Container>
+          </Container>
+        </Container>
+      </Modal>
+
+      <Modal animationType="slide" visible={addressModalVisible} transparent>
+        <Container
+          flex={1}
+          verticalAlignment="center"
+          horizontalAlignment="center"
+          backgroundColor={"rgba(0, 0, 0, 0.7)"}
+        >
+          <Container
+            height={35}
+            width={90}
+            verticalAlignment="center"
+            horizontalAlignment="center"
+            backgroundColor={"white"}
+            borderRadius={10}
+          >
+            <Container width={90} direction="row">
+              <Container width={70}></Container>
+            </Container>
+            <Container width={90} direction="row" marginTop={-1}>
+              <Container
+                width={90}
+                verticalAlignment="center"
+                horizontalAlignment="center"
+              >
+                <Text style={{ fontSize: 20, textAlign: 'center', paddingHorizontal: 10 }}>
+                  To start using this feature, you have to first set your home address for your guests. Kindly set your home address here
+                </Text>
+              </Container>
+            </Container>
+
+
+            <Container
+              marginTop={4}
+              width={90}
+              verticalAlignment="center"
+              horizontalAlignment="center"
+            >
+              <LongButton
+                onPress={() => props.navigation.navigate('personalbio')}
+                text={"Set Home Address"} width={50} np={50} />
             </Container>
           </Container>
         </Container>

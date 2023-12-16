@@ -1,5 +1,4 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ReportAnIssue from "../screens/reportAnIssue";
 import GenerateAccessCode from "../screens/generateAccessCode";
 import ReportIssueFill from "../screens/reportIssueFill";
 import AccessLog from "../screens/accessLog";
@@ -42,7 +41,6 @@ const HomeContainer = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="buttomTab" component={Dashboard} />
-      <Stack.Screen name="ReportAnIssue" component={ReportAnIssue} />
       <Stack.Screen name="AccessLog" component={AccessLog} />
       <Stack.Screen name="ReportIssueFill" component={ReportIssueFill} />
       <Stack.Screen name="GenerateAccessCode" component={GenerateAccessCode} />

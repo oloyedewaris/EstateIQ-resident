@@ -31,6 +31,7 @@ const BusinessGenerateCode = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [fetchedCode, setFetchedCode] = useState('');
   const [showArrival, setShowArrival] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
 
   const userEstateDetail = useQuery(['getUserEstateDetails'], getUserEstateDetails)
   const userDetailsAddress = userEstateDetail?.data?.data?.address
@@ -63,7 +64,11 @@ const BusinessGenerateCode = (props) => {
         setFetchedCode(res?.data?.access_code)
       },
       onError: (err) => {
-        // Alert.alert('An error occurred', handleBackendError(err?.response?.data))
+        const setHomeError = err?.response?.data?.error === 'Set home address in profile page before generating access code.'
+        if (setHomeError)
+          setAddressModalVisible(true)
+        else
+          Alert.alert('An error occurred', handleBackendError(err?.response?.data))
       }
     }
   )
@@ -178,16 +183,18 @@ const BusinessGenerateCode = (props) => {
 
           <TouchableOpacity onPress={() => setShowArrival(true)}>
             <Container marginTop={1} marginLeft={5}>
-              <InputCard
-                editable={false} selectTextOnFocus={false}
-                error={(formik.errors.exit_date && formik.touched.exit_date) ? formik.errors.exit_date : ''}
-                onChangeText={formik.handleChange('exit_date')}
-                onBlur={formik.handleBlur('exit_date')}
-                value={formik.values.exit_date && formattedExitDate}
+              <View removeClippedSubviews={true} pointerEvents="none">
+                <InputCard
+                  selectTextOnFocus={false}
+                  error={(formik.errors.exit_date && formik.touched.exit_date) ? formik.errors.exit_date : ''}
+                  onChangeText={formik.handleChange('exit_date')}
+                  onBlur={formik.handleBlur('exit_date')}
+                  value={formik.values.exit_date && formattedExitDate}
 
-                text={"Expiry Date and Time"}
-                placeholder={"DD/MM/YYYY"}
-              />
+                  text={"Expiry Date and Time"}
+                  placeholder={"DD/MM/YYYY"}
+                />
+              </View>
             </Container>
           </TouchableOpacity>
 
@@ -295,7 +302,7 @@ const BusinessGenerateCode = (props) => {
                   onShare(`
 Hi ${formik.values?.full_name},
 
-Your one-time code is 
+Your exit code is 
 
 ${fetchedCode}
 
@@ -308,6 +315,51 @@ Powered by: www.estateiq.ng
                   props.navigation.goBack();
                 }}
                 text={"Share"} width={50} np={50} />
+            </Container>
+          </Container>
+        </Container>
+      </Modal>
+
+      <Modal animationType="slide" visible={addressModalVisible} transparent>
+        <Container
+          flex={1}
+          verticalAlignment="center"
+          horizontalAlignment="center"
+          backgroundColor={"rgba(0, 0, 0, 0.7)"}
+        >
+          <Container
+            height={35}
+            width={90}
+            verticalAlignment="center"
+            horizontalAlignment="center"
+            backgroundColor={"white"}
+            borderRadius={10}
+          >
+            <Container width={90} direction="row">
+              <Container width={70}></Container>
+            </Container>
+            <Container width={90} direction="row" marginTop={-1}>
+              <Container
+                width={90}
+                verticalAlignment="center"
+                horizontalAlignment="center"
+              >
+                <Text style={{ fontSize: 20, textAlign: 'center', paddingHorizontal: 10 }}>
+                  To start using this feature, you have to first set your home address for your guests. Kindly set your home address here
+                </Text>
+              </Container>
+            </Container>
+
+
+            <Container
+              marginTop={4}
+              width={90}
+              verticalAlignment="center"
+              horizontalAlignment="center"
+            >
+              <LongButton
+                onPress={() => props.navigation.navigate('personalbio')}
+                text={"Set Home Address"} width={50} np={50} />
             </Container>
           </Container>
         </Container>

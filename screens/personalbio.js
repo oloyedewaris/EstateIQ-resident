@@ -89,7 +89,7 @@ const Personalbio = (props) => {
         </TouchableOpacity>
         <Container marginLeft={5} marginTop={3}>
           <Text style={{ fontSize: 18, fontWeight: "bold", color: "white" }}>
-            Personal bio
+            Personal Bio
           </Text>
         </Container>
         <Container marginLeft={4} marginTop={3} width={90}>
@@ -204,7 +204,7 @@ const Personalbio = (props) => {
                     fontSize: 20,
                   }}
                 >
-                  Personal bio updated
+                  Personal Bio updated
                 </Text>
               </Container>
             </Container>

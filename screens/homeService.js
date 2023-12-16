@@ -125,7 +125,7 @@ const HomeService = (props) => {
 
         {homeserviceQuery.isLoading ? (
           <View style={{ height: 100, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator color={Colors.appPrimaryBlue} size='large'/>
+            <ActivityIndicator color={Colors.appPrimaryBlue} size='large' />
           </View>
         ) : !homeservice?.length ? (
           <>
@@ -144,6 +144,7 @@ const HomeService = (props) => {
               <Vendcard
                 key={advert?.id}
                 id={advert.id}
+                advert={advert}
                 source={advert?.image}
                 text1={advert?.title}
                 text2={advert?.description}
