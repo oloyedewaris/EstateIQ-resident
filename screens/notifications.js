@@ -60,7 +60,6 @@ const Notifications = (props) => {
           </>
         ) : (
           <>
-            {/* {console.log('notifications', notifications)} */}
             {notifications?.map(notif => (
               <Container
                 id={notif.id}

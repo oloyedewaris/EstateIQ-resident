@@ -103,8 +103,34 @@ const PrivateGenerateCode = (props) => {
     }
   })
 
-  const formattedToDate = `${new Date(formik.values.to_date).toLocaleDateString()} ${formatAMPM(new Date(formik.values.to_date))}`
-  const formattedFromDate = `${new Date(formik.values.from_date).toLocaleDateString()} ${formatAMPM(new Date(formik.values.from_date))}`
+  const formattedToDate = `${new Date(formik.values?.to_date).toLocaleDateString()} ${formatAMPM(new Date(formik.values?.to_date))}`;
+  const formattedFromDate = `${new Date(formik.values?.from_date).toLocaleDateString()} ${formatAMPM(new Date(formik.values?.from_date))}`;
+
+  const shareString = (formik.values?.access_type && formik.values?.access_type) === 'PERMANENT' ? `
+  Hi ${formik.values?.first_name} ${formik.values?.last_name},
+  
+  Your permanent access code is 
+  
+  ${fetchedCode}
+  
+  Address : ${userDetailsAddress},
+  
+  expires on ${formattedToDate}
+
+  Powered by: www.estateiq.ng 
+  ` : `
+  Hi ${formik.values?.first_name} ${formik.values?.last_name},
+  
+  Your one-time access code is 
+  
+  ${fetchedCode}
+  
+  Address : ${userDetailsAddress},
+  
+  valid from ${formattedFromDate} to ${formattedToDate}
+  
+  Powered by: www.estateiq.ng 
+  `
 
   return (
     <Container flex={1} backgroundColor={"#FFFFFF"}>
@@ -160,7 +186,7 @@ const PrivateGenerateCode = (props) => {
               error={(formik.errors.first_name && formik.touched.first_name) ? formik.errors.first_name : ''}
               onChangeText={formik.handleChange('first_name')}
               onBlur={formik.handleBlur('first_name')}
-              value={formik.values.first_name}
+              value={formik.values?.first_name}
               text={"First Name"}
               placeholder={"(Guest)"}
             />
@@ -170,7 +196,7 @@ const PrivateGenerateCode = (props) => {
               error={(formik.errors.last_name && formik.touched.last_name) ? formik.errors.last_name : ''}
               onChangeText={formik.handleChange('last_name')}
               onBlur={formik.handleBlur('last_name')}
-              value={formik.values.last_name}
+              value={formik.values?.last_name}
 
               text={"Last Name"}
               placeholder={"(Guest)"}
@@ -189,7 +215,7 @@ const PrivateGenerateCode = (props) => {
               error={(formik.errors.category && formik.touched.category) ? formik.errors.category : ''}
               onChangeText={item => formik.handleChange('category')(item?.value)}
               onBlur={formik.handleBlur('category')}
-              value={formik.values.category}
+              value={formik.values?.category}
 
               text={"Guest Type"}
               placeholder={"Select"}
@@ -204,14 +230,14 @@ const PrivateGenerateCode = (props) => {
               error={(formik.errors.access_type && formik.touched.access_type) ? formik.errors.access_type : ''}
               onChangeText={item => formik.handleChange('access_type')(item?.value)}
               onBlur={formik.handleBlur('access_type')}
-              value={formik.values.access_type}
+              value={formik.values?.access_type}
 
               text={"Access Type"}
               placeholder={"Select"}
             />
           </Container>
 
-          {(formik.values.access_type && formik.values.access_type) === 'PERMANENT' ? (
+          {(formik.values?.access_type && formik.values?.access_type) === 'PERMANENT' ? (
             <TouchableOpacity onPress={() => setShowDeparture(true)}>
               <Container marginTop={1} marginLeft={5}>
                 <View removeClippedSubviews={true} pointerEvents="none">
@@ -220,7 +246,7 @@ const PrivateGenerateCode = (props) => {
                     error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
                     onChangeText={formik.handleChange('to_date')}
                     onBlur={formik.handleBlur('to_date')}
-                    value={formik.values.to_date && formattedToDate}
+                    value={formik.values?.to_date && formattedToDate}
 
                     text={"Expiry Date and Time"}
                     placeholder={"DD/MM/YYYY:TT"}
@@ -238,7 +264,7 @@ const PrivateGenerateCode = (props) => {
                       error={(formik.errors.from_date && formik.touched.from_date) ? formik.errors.from_date : ''}
                       onChangeText={formik.handleChange('from_date')}
                       onBlur={formik.handleBlur('from_date')}
-                      value={formik.values.to_date && formattedFromDate}
+                      value={formik.values?.from_date && formattedFromDate}
                       text={"Arrival Date and Time"}
                       placeholder={"DD/MM/YYYY"}
                     />
@@ -253,7 +279,7 @@ const PrivateGenerateCode = (props) => {
                       error={(formik.errors.to_date && formik.touched.to_date) ? formik.errors.to_date : ''}
                       onChangeText={formik.handleChange('to_date')}
                       onBlur={formik.handleBlur('to_date')}
-                      value={formik.values.to_date && formattedToDate}
+                      value={formik.values?.to_date && formattedToDate}
                       text={"Departure Date and Time"}
                       placeholder={"DD/MM/YYYY:TT"}
                     />
@@ -363,19 +389,7 @@ const PrivateGenerateCode = (props) => {
                 width={50}
                 np={50}
                 onPress={() => {
-                  onShare(`
-Hi ${formik.values?.first_name} ${formik.values?.last_name},
-
-Your ${formik?.values?.access_type} access code is 
-
-${fetchedCode}
-
-Address : ${userDetailsAddress},
-
-from ${formattedFromDate} to ${formattedFromDate}
-
-Powered by: www.estateiq.ng 
-`);
+                  onShare(shareString);
                   props.navigation.goBack()
                 }}
               />

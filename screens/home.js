@@ -43,11 +43,11 @@ const Home = (props) => {
     var curHr = today.getHours()
 
     if (curHr < 12) {
-      return 'Good Morning';
+      return 'Good morning';
     } else if (curHr < 18) {
-      return 'Good Afternoon';
+      return 'Good afternoon';
     } else {
-      return 'Good Evening';
+      return 'Good evening';
     }
   }
 

@@ -69,7 +69,6 @@ const WaybillGenerateCode = (props) => {
         // formik.resetForm()
       },
       onError: (err) => {
-        console.log('err?.response?.data', err?.response?.data)
         const setHomeError = err?.response?.data?.error === 'Set home address in profile page before generating access code.'
         if (setHomeError)
           setAddressModalVisible(true)

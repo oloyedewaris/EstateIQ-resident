@@ -10,18 +10,12 @@ import {
 } from "react-native";
 import { Container, TouchWrap } from "../helper/index";
 import { Colors } from "../helper/constants";
+import { useFocusEffect } from '@react-navigation/native'
 import { useMutation, useQuery } from "react-query";
 import { getAccessLogs, modifyAccessLog } from "../api/accessCode";
 import convertDate, { formattedDateToUse } from "../utils/formatDate";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
-import Entypo from "react-native-vector-icons/Entypo";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
 import { AntDesign } from "@expo/vector-icons";
 import LongButton from "../component/longbutton";
 
@@ -31,8 +25,14 @@ const AccessLog = (props) => {
   const [logToView, setLogToView] = useState(null)
   const [modalVisible, setModalVisible] = useState(false);
   const [revokeModalVisible, setRevokeModalVisible] = useState(false);
-  const accessQuery = useQuery(['getAccessLogs', search, status], () => getAccessLogs(search, status));
-  const logsData = accessQuery?.data?.data?.results
+  const accessQuery = useQuery(['getAccessLogs', search, status], () => getAccessLogs(search, status), { cacheTime: 1000 });
+  const logsData = accessQuery?.data?.data?.results;
+
+  useFocusEffect(
+    useCallback(() => {
+      accessQuery.refetch();
+    }, [])
+  )
 
   const revokeMutation = useMutation(
     async (formData, type) => {
@@ -373,7 +373,7 @@ const AccessLog = (props) => {
                   {logToView?.access === 'REVOKE' ? 'Denied' : logToView?.access === 'GRANT' ? 'Granted' : 'Not used'}
                 </Text>
               </Container>
-
+              {console.log('logToView', logToView)}
               {Boolean(logToView?.access_code) && (
                 <Container
                   width={75}
@@ -411,7 +411,7 @@ const AccessLog = (props) => {
                   direction="row"
                 >
                   <Text style={{ fontWeight: '500', color: '#616161', fontSize: 16, }}>Access Type:</Text>
-                  <Text style={{ fontWeight: '500', color: '#000', fontSize: 16, }}>{logToView?.access_type}</Text>
+                  <Text style={{ fontWeight: '500', color: '#000', fontSize: 16, }}>{logToView?.access_log_type}</Text>
                 </Container>
               )}
 

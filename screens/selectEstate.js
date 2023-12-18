@@ -35,7 +35,7 @@ const SetEstate = (props) => {
 
   const handleSelectEstate = (estate) => {
     if (estate.status !== 'ACTIVE')
-      return Alert.alert('Validation Error', `Your estate admin is yet to approve your request to join ${estate?.estate?.name} Estate on EstateIQ. Kindly contact your estate admin for approval.`)
+      return Alert.alert('Validation Error', `Your estate admin is yet to approve your request to join ${estate?.estate?.name} on EstateIQ. Kindly contact your estate admin for approval.`)
     setEstate(estate)(authDispatch);
     navigation.navigate('buttomTab');
   }

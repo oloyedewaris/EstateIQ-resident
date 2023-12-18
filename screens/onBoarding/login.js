@@ -47,7 +47,6 @@ const Login = (props) => {
         ToastLong('An error occurred try again')
     },
     onError: (err) => {
-      console.log('err', (err.response))
       Alert.alert('Login Error', JSON.stringify(err?.response?.data))
     }
   })

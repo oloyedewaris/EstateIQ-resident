@@ -256,7 +256,6 @@ const Editprofile = ({ navigation }) => {
                 color: Colors.appTextGrey,
               }}
             >
-              {console.log('estateData?.estate', estateData)}
               {estateData?.estate?.estate_type}
             </Text>
           </Container>

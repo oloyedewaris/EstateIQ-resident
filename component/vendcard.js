@@ -10,12 +10,18 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/Provider";
 
 export default function Vendcard(props) {
-  const { authState: { estateData } } = useContext(GlobalContext);
+  const { authState: { estateData, user } } = useContext(GlobalContext);
 
   const LunchWhatsapp = (phone) => {
-    const text = `Hello, I would like to reach out to this brand "${props?.advert?.title}" as advertised on EstateIQ." 
-    From Estate "${estateData?.estate?.name}"`
+    const text = `
+Hello, I would like to reach out to this brand "${props?.advert?.title}" as advertised on EstateIQ.
+
+From,
+${user?.first_name} ${user?.last_name},
+"${estateData?.estate?.name}".`
     const url = `whatsapp://send?phone=${+2347033221526}&text=${text}`;
+    Alert.alert('Test message', text)
+
     Linking.openURL(url);
   };
 
