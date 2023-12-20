@@ -39,14 +39,16 @@ const Login = (props) => {
 
   const loginMutation = useMutation(loginApi, {
     onSuccess: res => {
+      console.log('res', res)
       if (res.data?.user && res.data?.access_token) {
         loginUser(res.data)(authDispatch)
         props.navigation.navigate('setEstate')
       }
-      else
-        ToastLong('An error occurred try again')
+      // else
+      //   ToastLong('An error occurred try again')
     },
     onError: (err) => {
+      console.log('JSON.stringify(err)', (err?.response))
       Alert.alert('Login Error', JSON.stringify(err?.response?.data))
     }
   })

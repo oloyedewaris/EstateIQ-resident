@@ -1,22 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import {
-  StyleSheet,
   Text,
-  View,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-  Image,
   TouchableOpacity,
   ScrollView,
   Modal,
-  ActivityIndicator,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
 
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { Colors, FONT_FAMILY, RH, RW, RF, RR } from "../helper/constants";
+import { Colors } from "../helper/constants";
 import LongButton from "../component/longbutton";
 import { useState } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -26,12 +18,7 @@ import { getMembers } from "../api/invite";
 // import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const Household = (props) => {
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 150 : 0;
   const [modalVisible, setModalVisible] = useState(false);
-
-  const membersQuery = useQuery(['getMembers'], getMembers)
-
-  const members = membersQuery?.data?.data?.results
 
   const offmodal = () => {
     setModalVisible(false);
@@ -75,77 +62,15 @@ const Household = (props) => {
           </Text>
         </Container>
 
-        <Container horizontalAlignment="center" marginTop={4}>
+        <Container horizontalAlignment="center" marginTop={8}>
           <LongButton text={"Register"} onPress={() => setModalVisible(true)} />
         </Container>
-
-
-        <Container
-          verticalAlignment="center"
-          horizontalAlignment="space-between"
-          marginTop={4}
-          direction="row"
-          backgroundColor={Colors.appPrimaryBlue}
-          paddingHorizontal={8}
-          paddingVertical={1}
-        >
-          <TouchableOpacity style={{ maxWidth: '35%' }}>
-            <Text style={{ color: "white" }}>Name</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{ maxWidth: '30%' }}>
-            <Text style={{ color: "white" }}>Mobile</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{ maxWidth: '35%' }}>
-            <Text style={{ color: "white" }}> User Category</Text>
-          </TouchableOpacity>
+        <Container horizontalAlignment="center" marginTop={8}>
+          <LongButton text={"View"} onPress={() => props.navigation.navigate("householdView")} />
         </Container>
-        {membersQuery.isLoading ? (
-          <View style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator color={Colors.appPrimaryBlue} size='large'/>
-          </View>
-        ) : !members?.length ? (
-          <>
-            <Container height={40} width={70} marginLeft={15}>
-              <ImageWrap source={AppIcons.lists} fit="contain" />
-            </Container>
-            <Container>
-              <Text style={{ fontWeight: "bold", fontSize: 16, textAlign: "center" }}>
-                You have not registered any member yet!
-              </Text>
-            </Container>
-          </>
-        ) : (
-          <>{members?.map(member => (
-            <Container
-              id={member.id}
-              key={member.id}
-              verticalAlignment="center"
-              horizontalAlignment="space-between"
-              marginTop={4}
-              direction="row"
-              paddingHorizontal={8}
-              paddingVertical={1}
-            >
-              {/* <TouchableOpacity>
-              <Text style={{ color: Colors.appPrimaryBlue }}>{member?.id}</Text>
-            </TouchableOpacity> */}
 
-              <TouchableOpacity style={{ maxWidth: '35%' }}>
-                <Text style={{ color: Colors.appPrimaryBlue }}>{member?.user?.first_name} {member?.user?.last_name}</Text>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={{ maxWidth: '30%' }}>
-                <Text style={{ color: Colors.appPrimaryBlue }}>{member?.user?.mobile}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ maxWidth: '35%' }}>
-                <Text style={{ color: Colors.appPrimaryBlue }}> {member?.user_category}</Text>
-              </TouchableOpacity>
-            </Container>
-          ))}</>
-        )}
-        <Container horizontalAlignment="center">
+        <Container horizontalAlignment="center" marginTop={20}>
           <ImageWrap
             source={AppIcons.logo}
             fit="contain"
@@ -158,7 +83,7 @@ const Household = (props) => {
       <Modal onRequestClose={() => setModalVisible(false)} animationType="slide" visible={modalVisible} transparent>
         <Container
           flex={1}
-          verticalAlignment="flex-end"
+          verticalAlignment="center"
           horizontalAlignment="center"
           backgroundColor={"rgba(52, 52, 52, 0.8)"}
         >
@@ -206,7 +131,7 @@ const Household = (props) => {
                 <Container marginLeft={3} marginTop={2}>
                   <Text style={{ fontWeight: "bold", fontSize: 15 }}>
                     {" "}
-                    Register HouseHold Members
+                    Register Household Members
                   </Text>
                 </Container>
                 <Container marginLeft={3} marginTop={2}>

@@ -90,7 +90,7 @@ const RegisterDomestic = (props) => {
     first_name: Yup.string().required('Required'),
     last_name: Yup.string().required('Required'),
     designation: Yup.string().required('Required'),
-    email: Yup.string().required('Required').email('Invalid email address'),
+    email: Yup.string(),
     mobile: Yup.string().required('Required'),
     gender: Yup.string().required('Required'),
     address: Yup.string().required('Required'),
@@ -125,7 +125,7 @@ const RegisterDomestic = (props) => {
       formData.append('first_name', values.first_name)
       formData.append('last_name', values.last_name)
       formData.append('designation', values.designation)
-      formData.append('email', values.email)
+      // formData.append('email', values.email)
       formData.append('mobile', values.mobile)
       formData.append('gender', values.gender)
       formData.append('address', values.address)
@@ -133,6 +133,10 @@ const RegisterDomestic = (props) => {
       if (!values.profile_image)
         return Alert.alert('Form error', 'Please insert an image to proceed')
       formData.append('profile_image', values.profile_image)
+
+      if (values.email === '')
+        email_to_use = 'test@test334245663w.com';
+      formData.append('email', values.email_to_use)
       addMemberApi.mutate(formData)
     }
   })
@@ -178,10 +182,10 @@ const RegisterDomestic = (props) => {
         </View>
         <View
           style={{
-            height: 800,
+            height: 1000,
             width: "95%",
             backgroundColor: "white",
-            marginTop: "-130%",
+            marginTop: "-120%",
             elevation: 10,
             marginLeft: "2.5%",
             borderRadius: 5,
@@ -279,7 +283,7 @@ const RegisterDomestic = (props) => {
               value={formik.values.email}
 
               text={"Email address"}
-              placeholder={"Enter email address of domestic staff"}
+              placeholder={"Enter email address of domestic staff (optional)"}
               keyboardType={'email-address'}
             />
           </Container>
@@ -370,12 +374,11 @@ const RegisterDomestic = (props) => {
                 verticalAlignment="center"
                 horizontalAlignment="center"
               >
-                <Text
-                  style={{
-                    fontSize: 20,
-                  }}
-                >
-                  User Invited
+                <Text style={{ fontSize: 20, fontWeight: '500' }}>
+                  Domestic staff profile created
+                </Text>
+                <Text style={{ fontSize: 20, marginTop: 20, textAlign: 'center' }} >
+                  Remember to share staff ID with domestic staff for security checks at the gate
                 </Text>
               </Container>
             </Container>

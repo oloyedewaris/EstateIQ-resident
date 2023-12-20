@@ -1,23 +1,23 @@
 {
     "created_by": {
         "estate": "f92ae0d8-90d9-4725-9ae7-5925581017f6",
-        "estate_user_id": "LA5958",
-        "id": "20718b3f-589e-4ab6-8bb0-cf7efe81e68d",
+        "estate_user_id": "LA4027",
+        "id": "45d28985-1f16-4d79-b3a2-a18fa47f9f37",
         "profile_image": null,
         "role": "OTHERS",
         "status": "ACTIVE",
-        "timestamp": "2023-12-06T17:13:29.993613Z",
+        "timestamp": "2023-12-18T18:25:59.986375Z",
         "user": {
-            "email": "oloyedewaristemitope@gmail.com",
-            "first_name": "Waris",
-            "id": "d1e0dde0-f6e7-42b1-9c63-9633ecc2fb2d",
-            "last_name": "Oloyede",
+            "email": "pakadi1328@arensus.com",
+            "first_name": "WarisTest",
+            "id": "ed55c460-c6a4-44cc-b861-e07ab6bb853a",
+            "last_name": "OloyedeTest",
             "mobile": 2348108745769
         },
-        "user_category": "OTHERS",
-        "user_type": "ADMIN"
+        "user_category": "EXCOS",
+        "user_type": "RESIDENT"
     },
-    "designation": null,
+    "designation": "PARENT",
     "emergency_service": true,
     "estate": {
         "accept_terms_and_condition": true,
@@ -36,25 +36,25 @@
         "timestamp": "2023-12-06T17:13:29.984486Z"
     },
     "estate_street": null,
-    "estate_user_id": "LA8841",
+    "estate_user_id": "LA4854",
     "estate_zone": null,
     "gate_pass": true,
-    "id": "4c827963-3107-4149-95c1-f31cf04acdb7",
+    "id": "305ce28c-01c8-4902-8794-1be03319b9ed",
     "invited": true,
     "on_to_one_message": true,
     "profile_image": null,
     "relationship": null,
     "role": "OTHERS",
-    "status": "ACTIVE",
-    "timestamp": "2023-12-08T01:55:21.635656Z",
+    "status": "INACTIVE",
+    "timestamp": "2023-12-19T10:33:19.164856Z",
     "user": {
-        "email": "oloyedewaris@gmail.com",
-        "first_name": "Waris",
-        "id": "d64f1a04-8da1-4cab-beaf-d363415eea72",
-        "last_name": "Oloyede",
-        "mobile": 2348108745769
+        "email": "fayis98874@anawalls.com",
+        "first_name": "Wale",
+        "id": "6683a07c-b939-4a7e-85e0-69441c96b4a9",
+        "last_name": "ola",
+        "mobile": 8108745759
     },
-    "user_category": "SECURITY",
+    "user_category": "FAMILY_MEMBER",
     "user_type": "RESIDENT",
     "utility_portal": true
 }

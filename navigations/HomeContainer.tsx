@@ -33,6 +33,7 @@ import EmergencyList from "../screens/emergencyList";
 import Marketplace from "../screens/marketplace";
 import HomeService from "../screens/homeService";
 import DiscountedMarketplace from "../screens/discountMarketplac";
+import HouseholdView from "../screens/householdView";
 
 
 const HomeContainer = () => {
@@ -48,6 +49,7 @@ const HomeContainer = () => {
       <Stack.Screen name="personalbio" component={Personalbio} />
       <Stack.Screen name="contactinfo" component={Contactinfo} />
       <Stack.Screen name="household" component={Household} />
+      <Stack.Screen name="householdView" component={HouseholdView} />
       <Stack.Screen name="registerhouse" component={RegisterHouse} />
       <Stack.Screen name="registerdomestic" component={RegisterDomestic} />
       <Stack.Screen name="cardpayment" component={CardPayment} />

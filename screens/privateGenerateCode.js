@@ -33,7 +33,6 @@ const PrivateGenerateCode = (props) => {
   const [fetchedCode, setFetchedCode] = useState('');
   const [showArrival, setShowArrival] = useState(false);
   const [showDeparture, setShowDeparture] = useState(false);
-  const [accessType, setAccessType] = useState(null);
 
   const userEstateDetail = useQuery(['getUserEstateDetails'], getUserEstateDetails)
   const userDetailsAddress = userEstateDetail?.data?.data?.address
@@ -99,6 +98,8 @@ const PrivateGenerateCode = (props) => {
     },
     validationSchema: Schema,
     onSubmit: values => {
+      if (values?.access_type === 'PERMANENT')
+        delete values.from_date
       createCodeMutation.mutate(values)
     }
   })

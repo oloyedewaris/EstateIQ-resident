@@ -43,9 +43,10 @@ const RegisterHouse = (props) => {
     {
       onSuccess: res => {
         setModalVisible(true)
-        formik.resetForm()
+        // formik.resetForm()
       },
       onError: (err) => {
+        console.log('err', JSON.stringify(err))
         Alert.alert('An error occurred', JSON.stringify(err?.response?.data))
       }
     }
@@ -219,12 +220,8 @@ const RegisterHouse = (props) => {
                 verticalAlignment="center"
                 horizontalAlignment="center"
               >
-                <Text
-                  style={{
-                    fontSize: 20,
-                  }}
-                >
-                  User Invited
+                <Text style={{ fontSize: 20, fontWeight: '500', textAlign: 'center' }}>
+                  Family member already invited to EstateIQ via e-mail
                 </Text>
               </Container>
             </Container>
