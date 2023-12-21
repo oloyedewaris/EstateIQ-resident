@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.estateiq.estateiq"
     },
     "android": {
       "enableDangerousExperimentalLeanBuilds": true,
@@ -30,9 +31,6 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "eas": {
-        "projectId": "da3c90b3-2aa7-4267-a35b-d9dae871b68c"
-      }
     },
     "runtimeVersion": {
       "policy": "appVersion"

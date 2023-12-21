@@ -2,8 +2,6 @@
   "compilerOptions": {},
   "extends": "expo/tsconfig.base"
 }
-// "extra": {
-//   "eas": {
-//     "projectId": "21d4f916-c180-4da5-b77d-b717940db43c"
-//   }
+// "eas": {
+//   "projectId": "da3c90b3-2aa7-4267-a35b-d9dae871b68c"
 // }
