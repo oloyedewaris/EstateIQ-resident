@@ -12,7 +12,9 @@
     },
     "preview3": {
       "developmentClient": true
-    },
+    }
+  },
+  "submit": {
     "production": {
       "ios": {
         "appleId": "adetutu.james@icloud.com",
