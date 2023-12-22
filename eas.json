@@ -13,7 +13,13 @@
     "preview3": {
       "developmentClient": true
     },
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "adetutu.james@icloud.com",
+        "ascAppId": "6474884681",
+        "appleTeamId": "ZBKW73NCH5"
+      }
+    }
   },
   "cli": {
     "promptToConfigurePushNotifications": false
