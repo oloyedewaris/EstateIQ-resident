@@ -373,7 +373,6 @@ const AccessLog = (props) => {
                   {logToView?.access === 'REVOKE' ? 'Denied' : logToView?.access === 'GRANT' ? 'Granted' : 'Not used'}
                 </Text>
               </Container>
-              {console.log('logToView', logToView)}
               {Boolean(logToView?.access_code) && (
                 <Container
                   width={75}

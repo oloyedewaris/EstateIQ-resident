@@ -1,7 +1,6 @@
 // @flow
 
-import React, { ReactNode } from "react";
-import Animated, { Easing } from "react-native-reanimated";
+import React from "react";
 import {
   View,
   Text,
@@ -20,6 +19,7 @@ import {
 } from "react-native";
 import { RW, RH, RR } from "./constants";
 const { width, height } = Dimensions.get("window");
+import { scale } from "react-native-size-matters";
 
 export const scaleFont = (val: any) => {
   let factor = PixelRatio.get();

@@ -90,7 +90,7 @@ const generalOptions = ({ route }) => ({
     width: "100%",
     height: 55,
   },
-  tabBarShowLabel: true,
+  tabBarShowLabel: false,
   headerShown: false,
 })
 

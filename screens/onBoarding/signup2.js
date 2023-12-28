@@ -9,6 +9,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../../helper/index";
 import { AppIcons } from "../../helper/images";
@@ -35,6 +36,7 @@ const Signup2 = (props) => {
   const keyboardVerticalOffset = Platform.OS === "ios" ? -40 : -40;
   const route = useRoute();
   const navigation = useNavigation();
+  const { width, height } = Dimensions.get('window');
 
 
   const Schema = Yup.object().shape({
@@ -106,7 +108,7 @@ const Signup2 = (props) => {
         <ScrollView>
           <View
             style={{
-              height: 620,
+              height: height / 2,
               width: "100%",
               backgroundColor: Colors.appPrimaryBlue,
             }}
@@ -144,7 +146,7 @@ const Signup2 = (props) => {
               height: 700,
               width: "95%",
               backgroundColor: "white",
-              marginTop: "-130%",
+              marginTop: -(height / 3.1),
               elevation: 10,
               marginLeft: "2.5%",
               borderRadius: 5,

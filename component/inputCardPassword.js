@@ -38,10 +38,11 @@ export default function InputCardPassword({ error, text, placeholder, editable, 
             secureTextEntry={hide}
             {...rest}
           />
-          <TouchWrap hitSlop={{ bottom: 10, right: 10, left: 10, top: 10 }} onPress={() => setHide(!hide)}>
+          <TouchWrap justifyContent="'center" alignItems="center" h='100%' hitSlop={{ bottom: 10, right: 10, left: 10, top: 10 }} onPress={() => setHide(!hide)}>
             <Container
-              height={6}
-              width={8}
+              // height={6}
+              // width={8}
+              marginTop={1.1}
               marginLeft={-9}
               verticalAlignment="center"
               horizontalAlignment="center"

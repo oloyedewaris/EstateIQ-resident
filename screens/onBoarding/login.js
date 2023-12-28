@@ -23,7 +23,6 @@ import * as Yup from 'yup';
 import { useMutation } from "react-query";
 import { useFormik } from "formik";
 import InputCardPassword from "../../component/inputCardPassword";
-import { ToastLong } from "../../helper/toast";
 import { GlobalContext } from "../../context/Provider";
 import { loginUser } from "../../context/actions/auth";
 
@@ -39,7 +38,6 @@ const Login = (props) => {
 
   const loginMutation = useMutation(loginApi, {
     onSuccess: res => {
-      console.log('res', res)
       if (res.data?.user && res.data?.access_token) {
         loginUser(res.data)(authDispatch)
         props.navigation.navigate('setEstate')
@@ -48,7 +46,6 @@ const Login = (props) => {
       //   ToastLong('An error occurred try again')
     },
     onError: (err) => {
-      console.log('JSON.stringify(err)', (err?.response))
       Alert.alert('Login Error', JSON.stringify(err?.response?.data))
     }
   })

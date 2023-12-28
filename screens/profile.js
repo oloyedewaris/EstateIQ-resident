@@ -1,4 +1,4 @@
-import { Text, Platform, Modal, TouchableOpacity, Image, ActivityIndicator, View, Linking, Touchable, } from "react-native";
+import { Text, Platform, Modal, TouchableOpacity, Image, ActivityIndicator, View, Linking, Touchable, Alert, } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -74,30 +74,42 @@ const Profilee = (props) => {
   const pickImage = async () => {
     cameraRef.current.close()
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 0.2,
-    });
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 4],
+        quality: 0.2,
+      });
 
-    if (!result.canceled) {
-      updateImage(result.assets[0]);
+      if (!result.canceled) {
+        updateImage(result.assets[0]);
+      }
+    } catch (e) {
+      const ans = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      Alert.alert('Error!!', JSON.stringify(e?.code))
     }
   };
 
   const openCamera = async () => {
     cameraRef.current.close()
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 0.2,
-    });
+    try {
+      let result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 4],
+        quality: 0.2,
+      });
 
-    if (!result.canceled) {
-      updateImage(result.assets[0]);
+      if (!result.canceled) {
+        updateImage(result.assets[0]);
+      }
+    } catch (e) {
+      if (e?.code === 'ERR_MISSING_CAMERA_PERMISSION') {
+        const ans = await ImagePicker.requestCameraPermissionsAsync();
+      }
+      Alert.alert('Error!!', JSON.stringify(e?.code))
     }
   };
 

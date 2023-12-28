@@ -11,6 +11,7 @@ import {
   Image,
   Modal,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
@@ -35,6 +36,7 @@ const RegisterDomestic = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState('')
   const cameraRef = useRef();
+  const { width, height } = Dimensions.get('window');
 
   const updateImage = (file) => {
     let localUri = file.uri;
@@ -147,7 +149,7 @@ const RegisterDomestic = (props) => {
       <ScrollView>
         <View
           style={{
-            height: 620,
+            height: height / 2,
             width: "100%",
             backgroundColor: Colors.appPrimaryBlue,
           }}
@@ -185,7 +187,7 @@ const RegisterDomestic = (props) => {
             height: 1000,
             width: "95%",
             backgroundColor: "white",
-            marginTop: "-120%",
+            marginTop: -(height / 3.1),
             elevation: 10,
             marginLeft: "2.5%",
             borderRadius: 5,

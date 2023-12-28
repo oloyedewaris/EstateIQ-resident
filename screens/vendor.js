@@ -51,7 +51,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("marketplace", { type: 'GROCERIES_SHOPPING' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle1} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Groceries Shopping
                   </Text>
                 </Container>
@@ -61,7 +67,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("marketplace", { type: 'HEALTH_AND_WELLNESS' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle2} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Health & Wellness
                   </Text>
                 </Container>
@@ -129,7 +141,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("marketplace", { type: 'DELIVERY' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle6} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Delivery
                   </Text>
                 </Container>
@@ -161,7 +179,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("homeService", { type: 'AC_REPAIR' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle7} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Ac Repair
                   </Text>
                 </Container>
@@ -228,7 +252,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("homeService", { type: 'PLUMBER' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle11} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Plumber
                   </Text>
                 </Container>
@@ -295,7 +325,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("homeService", { type: 'CARPENTER' })}>
                 <Container width={17} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle9} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Carpenter
                   </Text>
                 </Container>
@@ -362,7 +398,13 @@ const Vendor = (props) => {
               <TouchWrap onPress={() => props.navigation.navigate("homeService", { type: 'PHOTOGRAPH' })}>
                 <Container width={20} height={8} borderRadius={50}>
                   <ImageWrap source={AppIcons.circle19} fit="contain" />
-                  <Text style={{ fontSize: 13, color: Colors.appPrimaryBlue }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: Colors.appPrimaryBlue,
+                      textAlign: "center",
+                    }}
+                  >
                     Photograph
                   </Text>
                 </Container>

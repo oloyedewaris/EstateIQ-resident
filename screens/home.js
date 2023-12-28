@@ -5,6 +5,8 @@ import {
   Alert,
   Linking,
   Modal,
+  Dimensions,
+  View,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
@@ -22,6 +24,7 @@ import LongButton from "../component/longbutton";
 const Home = (props) => {
   const { authState: { user, estateData }, authDispatch } = useContext(GlobalContext);
   const [modalVisible, setModalVisible] = useState(false);
+  const { width, height } = Dimensions.get('window');
 
   const userDetailsQuery = useQuery(['getUserEstateDetails'], getUserEstateDetails, { cacheTime: 0 })
   const profileImage = userDetailsQuery?.data?.data?.profile_image;
@@ -54,7 +57,7 @@ const Home = (props) => {
   return (
     <Container flex={1} backgroundColor={"#FFFFFF"} marginBottom={7}>
       <ScrollView>
-        <Container width={100} height={7} marginTop={5} direction="row">
+        <Container width={100} height={5} marginTop={4} marginButtom={2} direction="row">
           <Container height={7} marginLeft={5} verticalAlignment="center">
             <MaterialIcons name="location-on" size={22} color="#1037B5" />
           </Container>
@@ -66,7 +69,7 @@ const Home = (props) => {
           >
             <Text style={{ fontSize: 16 }}>{estateData?.estate?.name}</Text>
           </Container>
-          <Container
+          {/* <Container
             height={7}
             width={15}
             verticalAlignment="center"
@@ -80,27 +83,28 @@ const Home = (props) => {
                 width={6}
               />
             </TouchWrap>
-          </Container>
+          </Container> */}
         </Container>
         <TouchableOpacity onPress={() => props.navigation.navigate('editprofile')}>
           <Container
-            height={15}
+            height={12}
             width={90}
+            marginVertical={2}
             marginLeft={5}
             borderRadius={10}
             verticalAlignment="center"
             backgroundColor={Colors.appPrimaryBlue}
             direction="row"
           >
-            <Container width={20} height={10} borderRadius={50} marginLeft={5} marginRight={3}>
+            <Container width={12} height={10} borderRadius={50} marginLeft={5} marginRight={3}>
               {profileImage ? (
-                <Image style={{ width: 60, height: 60, borderRadius: 100, marginTop: 7 }} source={{ uri: `https://api.estateiq.ng/${profileImage}` }} fit="contain" />
+                <Image style={{ width: 50, height: 50, borderRadius: 100, marginTop: 7 }} source={{ uri: `https://api.estateiq.ng/${profileImage}` }} fit="contain" />
               ) : (
                 <ImageWrap
                   source={AppIcons.avatar}
                   borderRadius={1000}
                   fit="contain"
-                  width={15}
+                  width={10}
                   height={10}
                 />
               )}
@@ -123,91 +127,95 @@ const Home = (props) => {
         <Container marginTop={2} marginLeft={6}>
           <Text>Select a preferred option</Text>
         </Container>
-        <Container width={100} height={16} direction="row" marginTop={2}>
-          <TouchWrap onPress={() => props.navigation.navigate("AccessCode")}>
-            <Container
-              height={14}
-              width={43}
-              marginLeft={5}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box1} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
-          <TouchWrap
-            onPress={() => props.navigation.navigate("ReportIssueFill")}
+        <Container
+          direction="row" marginTop={2}
+          style={{
+            width: '95%',
+            paddingHorizontal: '7%',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
           >
-            <Container
-              height={14}
-              width={43}
-              marginLeft={3}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box2} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
+            <TouchableOpacity onPress={() => props.navigation.navigate("AccessCode")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box1} fit="contain" />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
+          >
+            <TouchableOpacity onPress={() => props.navigation.navigate("ReportIssueFill")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box2} fit="contain" />
+            </TouchableOpacity>
+          </View>
         </Container>
-        <Container width={100} height={16} direction="row" marginTop={2}>
-          <TouchWrap onPress={() => props.navigation.navigate("household")}>
-            <Container
-              height={14}
-              width={43}
-              marginLeft={5}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box3} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
-          <TouchWrap onPress={() => props.navigation.navigate("bills")}>
-            <Container
-              height={14}
-              width={43}
-              marginLeft={3}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box4} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
+        <Container
+          direction="row" marginTop={2}
+          style={{
+            width: '95%',
+            paddingHorizontal: '7%',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
+          >
+            <TouchableOpacity onPress={() => props.navigation.navigate("household")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box3} fit="contain" />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
+          >
+            <TouchableOpacity onPress={() => props.navigation.navigate("bills")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box4} fit="contain" />
+            </TouchableOpacity>
+          </View>
         </Container>
-        <Container width={100} direction="row" marginTop={2}>
-          <TouchWrap onPress={() => props.navigation.navigate("emergency")}>
-            <Container
-              height={14}
-              width={43}
-              marginLeft={5}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box5} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
-          <TouchWrap onPress={() => props.navigation.navigate("vendor")}>
-            <Container
-              height={14}
-              width={43}
-              marginLeft={3}
-              verticalAlignment="center"
-              horizontalAlignment="center"
-            >
-              <Container height={30} width={43} marginTop={1}>
-                <ImageWrap source={AppIcons.box6} fit="contain" />
-              </Container>
-            </Container>
-          </TouchWrap>
+        <Container
+          direction="row" marginTop={2}
+          style={{
+            width: '95%',
+            paddingHorizontal: '7%',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}
+        >
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
+          >
+            <TouchableOpacity onPress={() => props.navigation.navigate("emergency")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box5} fit="contain" />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: '47%',
+              height: height / 6.5,
+            }}
+          >
+            <TouchableOpacity onPress={() => props.navigation.navigate("vendor")}>
+              <Image style={{ width: '100%', height: '100%' }} resizeMode="contain" source={AppIcons.box6} fit="contain" />
+            </TouchableOpacity>
+          </View>
         </Container>
 
         <Container

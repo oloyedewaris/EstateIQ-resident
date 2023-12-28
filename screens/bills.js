@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Modal,
+  Alert,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
@@ -108,7 +109,8 @@ const Bills = (props) => {
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
-            onPress={() => props.navigation.navigate("communitylogs")}
+            // onPress={() => props.navigation.navigate("communitylogs")}
+            onPress={() => Alert.alert('Error', 'This feature is not available on your package')}
           >
             <Container width={10} height={5} borderRadius={50} marginLeft={3}>
               <ImageWrap source={AppIcons.mm} fit="contain" />
@@ -148,7 +150,8 @@ const Bills = (props) => {
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
-            onPress={() => props.navigation.navigate("paymenttransaction")}
+            onPress={() => Alert.alert('Error', 'This feature is not available on your package')}
+          // onPress={() => props.navigation.navigate("paymenttransaction")}
           >
             <Container width={10} height={5} borderRadius={50} marginLeft={3}>
               <ImageWrap source={AppIcons.mm} fit="contain" />
@@ -193,7 +196,8 @@ const Bills = (props) => {
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
-            onPress={() => props.navigation.navigate("nubanacct")}
+            // onPress={() => props.navigation.navigate("nubanacct")}
+            onPress={() => Alert.alert('Error', 'This feature is not available on your package')}
           >
             <Container width={10} height={5} borderRadius={50} marginLeft={3}>
               <ImageWrap source={AppIcons.mm} fit="contain" />

@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import { Container, TouchWrap } from "../../helper/index";
 
@@ -23,6 +24,7 @@ import { ToastLong } from "../../helper/toast";
 
 const Signup = (props) => {
   const keyboardVerticalOffset = Platform.OS === "ios" ? -40 : -40;
+  const { width, height } = Dimensions.get('window');
 
   const Schema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
@@ -77,7 +79,7 @@ const Signup = (props) => {
         <ScrollView>
           <View
             style={{
-              height: 620,
+              height: height / 2,
               width: "100%",
               backgroundColor: Colors.appPrimaryBlue,
             }}
@@ -115,7 +117,7 @@ const Signup = (props) => {
               height: 700,
               width: "95%",
               backgroundColor: "white",
-              marginTop: "-135%",
+              marginTop: -(height / 3.1),
               elevation: 10,
               marginLeft: "2.5%",
               borderRadius: 5,

@@ -7,6 +7,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Container, ImageWrap } from "../helper/index";
 import { AppIcons } from "../helper/images";
@@ -34,6 +35,7 @@ const WaybillGenerateCode = (props) => {
   const [showDeparture, setShowDeparture] = useState(false);
   const keyboardVerticalOffset = Platform.OS === "ios" ? -40 : -40;
   const [addressModalVisible, setAddressModalVisible] = useState(false);
+  const { width, height } = Dimensions.get('window');
 
   const userEstateDetail = useQuery(['getUserEstateDetails'], getUserEstateDetails)
   const userDetailsAddress = userEstateDetail?.data?.data?.address
@@ -114,7 +116,7 @@ const WaybillGenerateCode = (props) => {
         <ScrollView>
           <View
             style={{
-              height: 620,
+              height: height / 2,
               width: "100%",
               backgroundColor: Colors.appPrimaryBlue,
             }}
@@ -153,7 +155,7 @@ const WaybillGenerateCode = (props) => {
               height: 700,
               width: "95%",
               backgroundColor: "white",
-              marginTop: "-129%",
+              marginTop: -(height / 3.1),
               elevation: 10,
               marginLeft: "2.5%",
               borderRadius: 5,

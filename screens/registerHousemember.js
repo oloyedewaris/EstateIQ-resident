@@ -10,6 +10,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Dimensions,
 } from "react-native";
 import { Container, ImageWrap, TouchWrap } from "../helper/index";
 
@@ -29,7 +30,7 @@ import { ToastLong } from "../helper/toast";
 
 const RegisterHouse = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 150 : 0;
+  const { width, height } = Dimensions.get('window');
 
   const Schema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
@@ -46,7 +47,6 @@ const RegisterHouse = (props) => {
         // formik.resetForm()
       },
       onError: (err) => {
-        console.log('err', JSON.stringify(err))
         Alert.alert('An error occurred', JSON.stringify(err?.response?.data))
       }
     }
@@ -80,7 +80,7 @@ const RegisterHouse = (props) => {
       <ScrollView>
         <View
           style={{
-            height: 620,
+            height: height / 2,
             width: "100%",
             backgroundColor: Colors.appPrimaryBlue,
           }}
@@ -118,7 +118,7 @@ const RegisterHouse = (props) => {
             height: 700,
             width: "95%",
             backgroundColor: "white",
-            marginTop: "-130%",
+            marginTop: -(height / 3.1),
             elevation: 10,
             marginLeft: "2.5%",
             borderRadius: 5,

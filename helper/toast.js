@@ -1,8 +1,8 @@
-import Toast from 'react-native-simple-toast';
+// import Toast from 'react-native-simple-toast';
 // import Toast from "react-native-toast-message";
 
 export const ToastShort = msg => {
-  Toast.show(msg);
+  // Toast.show(msg);
   // Toast.show({
   //   // type: "error",
   //   position: "top",
@@ -16,7 +16,7 @@ export const ToastShort = msg => {
 };
 
 export const ToastLong = msg => {
-  Toast.show(msg, Toast.LONG);
+  // Toast.show(msg, Toast.LONG);
   // Toast.show({
   //   // type: "error",
   //   position: "top",
