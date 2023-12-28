@@ -3,7 +3,7 @@
     "scheme": "estateiqres",
     "name": "EstateIQ Resident",
     "slug": "EstateIQ",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -17,7 +17,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.estateiq.estateiq"
+      "bundleIdentifier": "com.estateiq.estateiq",
+      "buildNumber": "2"
     },
     "android": {
       "enableDangerousExperimentalLeanBuilds": true,
@@ -31,6 +32,9 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
+      "eas": {
+        "projectId": "b40a7fd4-d936-4f4c-8b14-c9364f343e94"
+      }
     },
     "runtimeVersion": {
       "policy": "appVersion"
